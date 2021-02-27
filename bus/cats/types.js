@@ -1,0 +1,8 @@
+export const types = {
+  // Sync
+  FILL_CATS: "FILL_CATS",
+  LOAD_CATS_START: "LOAD_CATS_START",
+  LOAD_CATS_END: "LOAD_CATS_END",
+  // Async
+  LOAD_CATS_ASYNC: "LOAD_CATS_ASYNC",
+};

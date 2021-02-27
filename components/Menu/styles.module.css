@@ -1,0 +1,17 @@
+.menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.menuItem {
+  padding: 5px 10px;
+}
+
+.menuItem:first-child {
+  padding-left: 0;
+}
+
+.active {
+  color: #ccc;
+}

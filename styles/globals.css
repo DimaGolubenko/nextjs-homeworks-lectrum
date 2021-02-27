@@ -1,0 +1,36 @@
+html,
+body {
+  padding: 20px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card-list {
+  padding: 25px 50px;
+}
+
+.card {
+  padding: 25px;
+  margin: 25px;
+  margin-left: 0;
+  background-color: #ccc;
+}
+
+.card-content {
+  font-size: 20px;
+}
+
+.card-date {
+  padding: 3px 10px;
+  background-color: #fff;
+  border-radius: 15px;
+}
