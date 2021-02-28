@@ -7,9 +7,6 @@ import "../styles/globals.css";
 import { useStore } from "../init/store";
 import { useApollo } from "../init/apollo";
 
-// Components
-import { ScriptsLoading } from "../components/ScriptsLoading";
-
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
   const apolloCLient = useApollo(pageProps.initialApolloState);
@@ -17,7 +14,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <ApolloProvider client={apolloCLient}>
-        <ScriptsLoading />
         <Component theme="default" {...pageProps} />
       </ApolloProvider>
     </Provider>
