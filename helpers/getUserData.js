@@ -28,7 +28,7 @@ export const getUserData = async (ctx, fs) => {
   const cookies = nookies.get(ctx);
   const userId = cookies.userId ? cookies.userId : generateUserId();
 
-  const usersJson = await fs.readFile("./data/users.json", "utf-8");
+  const usersJson = await fs.readFile("./data/users.json");
   const users = usersJson.length ? JSON.parse(usersJson) : [];
 
   const user = users.find((user) => user.userId === userId) || null;
