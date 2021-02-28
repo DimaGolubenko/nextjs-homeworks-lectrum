@@ -25,23 +25,27 @@ export const isFriend = (userType) => userType === userTypes.friend;
 export const isFamilyMember = (userType) => userType === userTypes.familyMember;
 
 export const getUserData = async (ctx, fs) => {
-  const cookies = nookies.get(ctx);
-  const userId = cookies.userId ? cookies.userId : generateUserId();
+  try {
+    const cookies = nookies.get(ctx);
+    const userId = cookies.userId ? cookies.userId : generateUserId();
 
-  const usersJson = await fs.readFile("./data/users.json");
-  const users = usersJson.length ? JSON.parse(usersJson) : [];
+    const usersJson = await fs.readFile("./data/users.json", "utf-8");
+    const users = usersJson.length ? JSON.parse(usersJson) : [];
 
-  const user = users.find((user) => user.userId === userId) || null;
-  const visitCount = user ? user.visitCount + 1 : 1;
-  const userType = getUserType(visitCount);
+    const user = users.find((user) => user.userId === userId) || null;
+    const visitCount = user ? user.visitCount + 1 : 1;
+    const userType = getUserType(visitCount);
 
-  const updatedUsers = users ? mapUsersData(users, userId, visitCount) : [{ userId, visitCount }];
-  await fs.writeFile("./data/users.json", JSON.stringify(updatedUsers));
-  setUserCookies(ctx, userId);
+    const updatedUsers = users ? mapUsersData(users, userId, visitCount) : [{ userId, visitCount }];
+    await fs.writeFile("./data/users.json", JSON.stringify(updatedUsers));
+    setUserCookies(ctx, userId);
 
-  return {
-    userId,
-    userType,
-    visitCount,
-  };
+    return {
+      userId,
+      userType,
+      visitCount,
+    };
+  } catch (e) {
+    throw new Error(e.message);
+  }
 };
