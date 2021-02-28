@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import fs from "fs-extra";
 
 // Actions
 import { userActions } from "../bus/user/actions";
