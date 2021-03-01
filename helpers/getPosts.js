@@ -1,5 +1,6 @@
 // Core
 import moment from "moment";
+import { resolve } from "path";
 
 // Helpers
 import { isGuest, isFriend, isFamilyMember } from "./getUserData";
@@ -11,7 +12,7 @@ const getPostsWithReceivingDate = (posts) =>
   });
 
 export const fetchPostsByCategory = async (fs, category) => {
-  const posts = JSON.parse(await fs.readFile(`./data/${category}.json`));
+  const posts = JSON.parse(await fs.readFile(resolve(__dirname, `../tmp/data/${category}.json`)));
   return getPostsWithReceivingDate(posts);
 };
 

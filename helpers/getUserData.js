@@ -1,6 +1,9 @@
+// Core
 import nookies from "nookies";
 import { v4 as uuid } from "uuid";
+import { resolve } from "path";
 
+// Other
 import { mapUsersData } from "./mapUsersData";
 import { userTypes } from "../bus/user/types";
 
@@ -28,7 +31,7 @@ export const getUserData = async (ctx, fs) => {
   const cookies = nookies.get(ctx);
   const userId = cookies.userId ? cookies.userId : generateUserId();
 
-  const usersJson = await fs.readFile("./data/users.json");
+  const usersJson = await fs.readFile(resolve(__dirname, "../tmp/data/users.json"));
   const users = usersJson.length ? JSON.parse(usersJson) : [];
 
   const user = users.find((user) => user.userId === userId) || null;
@@ -36,7 +39,7 @@ export const getUserData = async (ctx, fs) => {
   const userType = getUserType(visitCount);
 
   const updatedUsers = users ? mapUsersData(users, userId, visitCount) : [{ userId, visitCount }];
-  await fs.writeFile("./data/users.json", JSON.stringify(updatedUsers));
+  await fs.writeFile(resolve(__dirname, "../tmp/data/users.json"), JSON.stringify(updatedUsers));
   setUserCookies(ctx, userId);
 
   return {
